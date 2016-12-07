@@ -28,7 +28,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        let _pid = this.props.currentPage.get('id');
+        let _pid = this.props.currentPage.get('id') || window.localStorage.pid;
+        window.localStorage.pid = _pid;
         if (_pid) {
             document.getElementById('page_title').innerHTML = `有福企业内购平台-${this.props.currentPage.get('name')}`;
             this.props.actions.getCarousel({ params: {pid: _pid }})
