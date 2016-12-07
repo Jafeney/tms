@@ -74,7 +74,7 @@ class Product extends Component {
             success: () => {
                 this.pop.show()
                 this.addModal.close()
-                actions.getProduct({ params: { page_name: currentPage.get('name') }})
+                actions.getProduct({ params: { pid: currentPage.get('id') }})
             },
             error: (message) => {
                 window.alert(message)
@@ -96,7 +96,7 @@ class Product extends Component {
             success: () => {
                 this.pop.show()
                 this.editModal.close()
-                actions.getProduct({ params: { page_name: currentPage.get('name') }})
+                actions.getProduct({ params: { pid: currentPage.get('id') }})
             },
             error: (message) => {
                 window.alert(message)
@@ -114,7 +114,7 @@ class Product extends Component {
             success: () => {
                 this.pop.show()
                 this.delModal.close()
-                actions.getProduct({ params: {page_name: currentPage.get('name')} })
+                actions.getProduct({ params: {pid: currentPage.get('id')} })
             }
         })
     }

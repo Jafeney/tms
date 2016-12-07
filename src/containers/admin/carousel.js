@@ -48,7 +48,7 @@ class Carousel extends Component {
             success: () => {
                 this.pop.show()
                 this.addModal.close()
-                actions.getCarousel({ params: { page_name: currentPage.get('name') }})
+                actions.getCarousel({ params: { pid: currentPage.get('id') }})
             },
             error: (message) => {
                 window.alert(message)
@@ -68,7 +68,7 @@ class Carousel extends Component {
             success: () => {
                 this.pop.show()
                 this.editModal.close()
-                actions.getCarousel({ params: { page_name: currentPage.get('name') }})
+                actions.getCarousel({ params: { pid: currentPage.get('id') }})
             },
             error: (message) => {
                 window.alert(message)
@@ -86,7 +86,7 @@ class Carousel extends Component {
             success: () => {
                 this.pop.show()
                 this.delModal.close()
-                actions.getCarousel({ params: {page_name: currentPage.get('name')} })
+                actions.getCarousel({ params: {pid: currentPage.get('id')} })
             }
         })
     }

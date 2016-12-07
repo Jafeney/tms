@@ -58,7 +58,7 @@ class Shortcut extends Component {
             success: () => {
                 this.pop.show()
                 this.addModal.close()
-                actions.getShortcut({ params: { page_name: currentPage.get('name') }})
+                actions.getShortcut({ params: { pid: currentPage.get('id') }})
             },
             error: (message) => {
                 window.alert(message)
@@ -80,7 +80,7 @@ class Shortcut extends Component {
             success: () => {
                 this.pop.show()
                 this.editModal.close()
-                actions.getShortcut({ params: { page_name: currentPage.get('name') }})
+                actions.getShortcut({ params: { pid: currentPage.get('id') }})
             },
             error: (message) => {
                 window.alert(message)
@@ -98,7 +98,7 @@ class Shortcut extends Component {
             success: () => {
                 this.pop.show()
                 this.delModal.close()
-                actions.getShortcut({ params: {page_name: currentPage.get('name')} })
+                actions.getShortcut({ params: {pid: currentPage.get('id')} })
             }
         })
     }

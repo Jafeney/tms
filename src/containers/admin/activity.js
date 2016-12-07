@@ -71,7 +71,7 @@ class Activity extends Component {
             success: () => {
                 this.pop.show()
                 this.addModal.close()
-                actions.getActivity({ params: { page_name: currentPage.get('name') }})
+                actions.getActivity({ params: { pid: currentPage.get('id') }})
             },
             error: (message) => {
                 window.alert(message)
@@ -93,7 +93,7 @@ class Activity extends Component {
             success: () => {
                 this.pop.show()
                 this.editModal.close()
-                actions.getActivity({ params: { page_name: currentPage.get('name') }})
+                actions.getActivity({ params: { pid: currentPage.get('id') }})
             },
             error: (message) => {
                 window.alert(message)
@@ -111,7 +111,7 @@ class Activity extends Component {
             success: () => {
                 this.pop.show()
                 this.delModal.close()
-                actions.getActivity({ params: {page_name: currentPage.get('name')} })
+                actions.getActivity({ params: {pid: currentPage.get('id')} })
             }
         })
     }

@@ -122,6 +122,7 @@ class Main extends Component {
                         </h2>
                     </div>
                     <div onClick={()=>this.handleAdd()} className="fast-btn"><Icon name="plus" /></div>
+                    <div onClick={()=>this.handleAdd()} className="fast-btn show"><Icon name="qrcode" /></div>
                 </div>
                 <div className="container">
                     {this.props.children}
@@ -136,6 +137,12 @@ class Main extends Component {
                     <p className="footer">
                         <Button text="确定" callback={()=>this.handleModalSubmit()} type="primary" style={{marginRight: 10}} />
                         <Button text="取消" callback={()=>this.modal.close()} type="ghost" />
+                    </p>
+                </Modal>
+                <Modal title={"打开微信扫一扫"} style={{width: 400, height: 300}}
+                    ref={(ref)=> this.modal = ref}>
+                    <p style={{textAlign: 'center'}}>
+                        <img src="/img/qrcode.jpg" style={{width: '200px'}} />
                     </p>
                 </Modal>
                 <PopUp ref={(ref)=>this.pop = ref} />
