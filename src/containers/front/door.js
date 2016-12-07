@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import PureRenderMixin from '../../mixins/pure-render'
-import { auth, getPageNames } from '../../redux/actions/page'
+import { auth, getPageNames, updateCurrentPage } from '../../redux/actions/page'
 
 class Door extends Component {
 
@@ -69,8 +69,14 @@ class Door extends Component {
             },
             success: (data) => {
                 if (data.page_name) {
-                    window.localStorage.page_name = data.page_name;
-                    window.localStorage.page_color = data.page_color;
+                    actions.updateCurrentPage({
+                        data: {
+                            id: data.page_id,
+                            name: data.page_name,
+                            color: data.page_color,
+                            code: data.page_code,
+                        }
+                    })
                     actions.push('home')
                 }
             },
@@ -88,7 +94,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return { actions: bindActionCreators({push, auth, getPageNames}, dispatch) }
+    return { actions: bindActionCreators({push, auth, getPageNames, updateCurrentPage}, dispatch) }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Door)

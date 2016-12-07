@@ -14,7 +14,7 @@ import Animation from '../../royal/Other/QueueAnimation/'
 // redux
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { replace } from 'react-router-redux'
 import PureRenderMixin from '../../mixins/pure-render'
 import { getCarousel } from '../../redux/actions/carousel'
 import { getActivity } from '../../redux/actions/activity'
@@ -28,12 +28,16 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        let page_name = window.localStorage.page_name || '中国电信';
-        document.getElementById('page_title').innerHTML = `有福企业内购平台-${page_name}`;
-        this.props.actions.getCarousel({ params: {page_name: page_name }})
-        this.props.actions.getActivity({ params: {page_name: page_name }})
-        this.props.actions.getProduct({ params: {page_name: page_name }})
-        this.props.actions.getShortcut({ params: {page_name: page_name }})
+        let _pid = this.props.currentPage.get('id');
+        if (_pid) {
+            document.getElementById('page_title').innerHTML = `有福企业内购平台-${this.props.currentPage.get('name')}`;
+            this.props.actions.getCarousel({ params: {pid: _pid }})
+            this.props.actions.getActivity({ params: {pid: _pid }})
+            this.props.actions.getProduct({ params: {pid: _pid }})
+            this.props.actions.getShortcut({ params: {pid: _pid }})
+        } else {
+            this.props.actions.replace('/')
+        }
     }
 
     _renderCarousel(carousels) {
@@ -123,6 +127,7 @@ class Home extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
+        currentPage: state.currentPage,
         carousel: state.carousel,
         activity: state.activity,
         product: state.product,
@@ -131,7 +136,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return { actions: bindActionCreators({push, getCarousel, getActivity, getProduct, getShortcut}, dispatch) }
+    return { actions: bindActionCreators({replace, getCarousel, getActivity, getProduct, getShortcut}, dispatch) }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

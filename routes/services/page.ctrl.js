@@ -114,6 +114,8 @@ module.exports = {
                     data: {
                         page_name: data[0].p_name,
                         page_color: data[0].p_color,
+                        page_id: data[0].p_id,
+                        page_code: data[0].p_code,
                     }
                 })
             } else {
