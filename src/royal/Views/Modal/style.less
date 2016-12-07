@@ -1,0 +1,103 @@
+/**
+ * @desc Modal Component的样式
+ * @author Jafeney
+ * @dateTime 2016-07-07
+ **/
+@import '../../global.less';
+
+.ry-mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 99999;
+    background-color: rgba(0,0,0,.8);
+    top: 0;
+    left: 0;
+
+    &.ry-hidden {
+        display: none;
+    }
+}
+
+.ry-modal-box {
+    width: 540px;
+    height: 300px;
+    position: absolute;
+    z-index: 999;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #f0f0f0;
+
+    .header {
+        h3 {
+            margin: 0;
+            padding-left: 20px;
+            height: 40px;
+            line-height: 40px;
+            color: #fff;
+            background-color: @color-primary;
+            text-align: left;
+            font-size: 16px;
+            font-weight: normal;
+            position: relative;
+        }
+        .closed-mask {
+            position: absolute;
+            right: 12px;
+            top: 10px;
+            font-size: 20px;
+            color: #fff;
+
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
+
+            &:hover {
+                opacity: .8;
+            }
+        }
+    }
+
+    .mainer {
+        padding: 20px;
+        .tips {
+            text-align: center;
+            color: #666666;
+        }
+        .fail {
+            border-color: @color-primary;
+        }
+        .footer {
+            width: 100%;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            text-align: center;
+        }
+    }
+
+    .form-center {
+        text-align: center;
+        padding: 20px 10px;
+        color: #666666;
+        label {
+            span {
+                margin-right: 8px;
+            }
+        }
+        .error {
+            margin-top: 10px;
+            color: @color-primary;
+            font-size: 12px;
+        }
+    }
+
+    &.ry-hidden {
+        display: none;
+    }
+}

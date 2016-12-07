@@ -1,0 +1,56 @@
+/**
+ * @desc 全局配色
+ * @author Jafeney
+ * @dateTime 2016-07-08
+ **/
+
+@color-primary: #1e88e5;
+@color-secondary: #c21f16;
+@color-default: #999;
+@color-success: #60BE29;
+@color-fail: #E01515;
+
+// 常用的border-box盒子模型
+.border-box() {
+    box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+// 模拟按钮效果
+.btn() {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+
+    &:hover {
+        opacity: .8;
+    }
+
+    &.disabled {
+        &:hover {
+            opacity: 1;
+            cursor: not-allowed;
+        }
+    }
+}
+
+// 超出部分处理
+.text-overflow() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -1,0 +1,101 @@
+@import '../../global.less';
+
+.ry-btn {
+    height: 30px;
+    line-height: 30px;
+    width: 80px;
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 12px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-appearance: button;
+    border-radius: 4px;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -moz-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -ms-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &.disabled {
+        color: #aaaaaa;
+        background-color: #e5e5e5;
+        border: 1px solid #e6eaed;
+        cursor: not-allowed;
+
+        &:hover {
+            opacity: 1.0;
+        }
+    }
+}
+
+.ry-btn-primary {
+    color: #ffffff;
+    background-color: @color-primary;
+}
+
+.ry-btn-secondary {
+    color: #ffffff;
+    background-color: @color-secondary;
+}
+
+.ry-btn-default {
+    color: #ffffff;
+    background-color: @color-default;
+}
+
+.ry-btn-ghost {
+    color: @color-primary;
+    background-color: transparent;
+    border: 1px solid @color-primary;
+
+    &:hover {
+        color: #ffffff;
+        background-color: @color-primary;
+        border-color: @color-primary;
+    }
+}
+
+.ry-btn-small {
+    width: 60px;
+    height: 24px;
+    line-height: 24px;
+}
+
+.ry-btn-large {
+    width: 210px;
+    height: 46px;
+    line-height: 46px;
+    font-size: 16px;
+}
+
+.ry-btn-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+
+    &:hover {
+        .icon {
+            font-size: 14px;
+        }
+    }
+}

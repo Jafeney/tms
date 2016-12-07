@@ -1,0 +1,153 @@
+/**
+ * @desc Pagination Component的样式
+ * @author Jafeney
+ * @dateTime 2016-07-07
+ **/
+
+@color-default: '#eee';
+@color-active: '#888' ;
+
+.ry-pagination {
+    height:54px;
+    padding-top:15px;
+    font-size: 12px;
+
+    ul {
+        list-style:none;
+        display:inline-block;
+        float:right;
+        padding:0;
+        margin:0;
+
+        li {
+            display:inline-block;
+            width:32px;
+            height:32px;
+            line-height:32px;
+            text-align:center;
+            border:1px solid #ddd;
+            border-radius:2px;
+            color:#888;
+            margin-right:4px;
+            cursor:pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+
+            &:hover {
+                opacity: .8;
+            }
+
+            &.disabled {
+                &:hover {
+                    opacity: 1;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+
+    .paginate-current {
+        background-color:#888;
+        color:#fff;
+    }
+
+    .paginate-dot {
+        border:none;
+        cursor:default;
+    }
+
+    .next-page {
+        display:inline-block;
+        float:right;
+        width:64px;
+        height:32px;
+        line-height:32px;
+        text-align:center;
+        border:1px solid #ddd;
+        cursor:pointer;
+        color:#888;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+
+        i {
+            display:inline-block;
+            border:5px solid transparent;
+            border-left:5px solid #888;
+            margin-left:4px;
+        }
+    }
+
+    .prev-page {
+        margin-right:4px;
+        display:inline-block;
+        float:right;
+        width:64px;
+        height:32px;
+        line-height:32px;
+        text-align:center;
+        border:1px solid #ddd;
+        cursor:pointer;
+        color:#888;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+
+        i {
+            display:inline-block;
+            border:5px solid transparent;
+            border-right:5px solid #888;
+            margin-right:4px;
+        }
+    }
+
+    .unavailable {
+        cursor:default;
+        color:#ddd;
+
+        &.next-page{
+            i {
+                border-left:5px solid #ddd;
+            }
+        }
+
+        &.prev-page {
+            i {
+                border-right:5px solid #ddd;
+            }
+        }
+    }
+}
+
+.ry-currentPage {
+    display:inline-block;
+    float:right;
+    width:32px;
+    height:32px;
+    line-height:32px;
+    text-align:center;
+    border:1px solid #ddd;
+    border-radius:2px;
+    color:#888;
+    margin-right:4px;
+    cursor:pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+
+    &:hover {
+        opacity: .8;
+    }
+
+    &.disabled {
+        &:hover {
+            opacity: 1;
+            cursor: not-allowed;
+        }
+    }
+}

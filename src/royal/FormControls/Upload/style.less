@@ -1,0 +1,115 @@
+/**
+ * @desc Upload Component的样式
+ * @author Jafeney
+ * @dateTime 2016-07-07
+ **/
+
+@import '../../global.less';
+
+.ry-upload-box {
+    width: 760px;
+    margin: 1em auto;
+
+    .upload-main {
+        border: 1px solid #ccc;
+        background-color: #fbfbfb;
+
+        .upload-choose {
+            padding: 1em;
+        }
+
+        .upload-preview {
+            border-top: 1px solid #bbb;
+            border-bottom: 1px solid #bbb;
+            background-color: #fff;
+            overflow: hidden;
+            transition: all .3s ease;
+            -webkit-transition: all .3s ease;
+
+            &.ry-hidden {
+                display: none;
+            }
+        }
+
+        .upload-drag-area {
+            display: inline-block;
+            width: 60%;
+            padding: 4em 0;
+            margin-left: .5em;
+            border: 1px dashed #ddd;
+            background: #fff url('http://jafeney.com:9999/images/plus.png') no-repeat 100px center;
+            color: #999;
+            text-align: center;
+            vertical-align: middle;
+        }
+    }
+
+    .upload-submit {
+        padding-top: 1em;
+        padding-left: 1em;
+        transition: all .3s ease;
+        -webkit-transition: all .3s ease;
+
+        .upload-submit-btn {
+            display: none;
+            height: 32px;
+            font-size: 14px;
+        }
+
+        &.ry-hidden {
+            display: none;
+        }
+    }
+
+    .upload-info {
+        margin-top: 20px;
+        font-size: 12px;
+        input {
+            width: 500px;
+            padding: 3px 10px;
+        }
+        a {
+            margin-left: 10px;
+            .btn();
+        }
+        transition: all .3s ease;
+        -webkit-transition: all .3s ease;
+    }
+
+    .upload-append-list {
+        height: 300px;
+        padding: 0 1em;
+        float: left;
+        position: relative;
+    }
+
+    .upload-delete {
+        margin-left: 2em;
+        color: #34538b;
+        text-decoration: none;
+    }
+
+    .upload-image {
+        max-height: 250px;
+        padding: 5px;
+        transition: all .3s ease;
+        -webkit-transition: all .3s ease;
+    }
+
+    .upload-progress {
+        padding: 5px;
+        border-radius: 10px;
+        color: #fff;
+        background-color: rgba(0,0,0,.6);
+        position: absolute;
+        left: 25px;
+        top: 45px;
+        transition: all .3s ease;
+        -webkit-transition: all .3s ease;
+
+        &.ry-hidden {
+            display: none;
+        }
+    }
+
+}

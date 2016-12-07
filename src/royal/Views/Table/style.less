@@ -1,0 +1,64 @@
+/**
+ * @desc Table Component的样式
+ * @author Jafeney
+ * @dateTime 2016-07-07
+ **/
+
+.ry-table {
+    cursor: pointer;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 12px;
+    width: 96%;
+
+    .ry-checkbox-wrapper  {
+        position: relative;
+        top: -2px;
+    }
+
+    .ry-btn {
+        margin-right: 5px;
+    }
+
+    tr {
+        border: 0;
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+
+        &:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+        &:hover {
+            background-color: #f9f9f9;
+        }
+    }
+
+    th {
+        background-color: #fff;
+        font-weight: 700;
+        -webkit-transition: background .3s ease;
+        transition: background .3s ease;
+        text-align: left;
+        padding: 18px 15px;
+        color: #555;
+        border-top: 1px solid #eeeeee;
+        border-bottom: 1px solid #eeeeee;
+
+        &:first-child {
+            padding-left: 28px;
+        }
+    }
+
+    td {
+        min-width: 100px;
+        padding: 18px 15px;
+        color: #666;
+        margin: 0;
+        border-bottom: 1px solid #eeeeee;
+
+        &:first-child {
+            padding-left: 28px;
+        }
+    }
+}

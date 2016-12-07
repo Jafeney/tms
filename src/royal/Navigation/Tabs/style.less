@@ -1,0 +1,44 @@
+/**
+ * @desc Tabs Component的样式
+ * @author Jafeney
+ * @dateTime 2016-07-07
+ **/
+
+@import '../../global.less';
+
+.ry-tabs {
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.ry-tabs-header {
+    border-bottom: 1px solid #eee;
+    &>li {
+        text-align: center;
+        padding: 8px 25px;
+        display: inline-block;
+        color: #444a63;
+        .border-box();
+        border-bottom: 2px solid #ffffff;
+        .btn();
+        font-size: 14px;
+
+        &.ry-active {
+            color: @color-primary;
+            background-color: #fefefe;
+            border-bottom: 2px solid #ff634d;
+        }
+    }
+}
+
+.ry-tabs-mainer {
+    &>li {
+        display: none;
+        &.ry-active {
+            display: block;
+        }
+    }
+}

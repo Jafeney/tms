@@ -1,0 +1,52 @@
+/**
+ * @desc Input Component的样式
+ * @author Jafeney
+ * @dateTime 2016-07-07
+ **/
+@import '../../global.less';
+
+input[disabled] {
+    background-color: #efefef;
+    cursor: not-allowed;
+}
+
+.ry-input {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    outline: 0;
+    color: #888;
+    border-radius: 4px;
+}
+
+.ry-input-name {
+    margin-right: 8px;
+    color: #888;
+    font-size: 14px;
+}
+
+.ry-input-checked {
+    &.ry-success {
+        .ry-input-checked-ok {
+            display: inline-block;;
+        }
+    }
+
+    &.ry-fail {
+        .ry-input-checked-fail {
+            display: inline-block;
+        }
+    }
+}
+
+.ry-input-checked-ok {
+    display: none;
+    margin-left: 8px;
+    color: @color-success;
+}
+
+.ry-input-checked-fail {
+    display: none;
+    margin-left: 8px;
+    color: @color-fail;
+    font-size: 12px;
+}

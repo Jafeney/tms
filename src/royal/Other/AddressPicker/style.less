@@ -1,0 +1,99 @@
+/**
+ * @desc AddressPicker Component的样式
+ * @author Jafeney
+ * @dateTime 2016-07-07
+ **/
+
+@import "../../global.less";
+
+.ry-address-wrapper {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    width: 220px;
+    .input-location {
+        outline: 0;
+        border: 1px solid #cccccc;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        color: #888888;
+    }
+    .btn-clear {
+        position: absolute;
+        right: -50px;
+        top: 5px;
+        width: 40px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        font-size: 10px;
+        color: #ffffff;
+        background-color: #bbb;
+        .btn();
+    }
+    .address-picker {
+        width: 362px;
+        position: absolute;
+        top: 35px;
+        background: #ffffff;
+        z-index: 10;
+        border: 1px solid #bbb;
+        border-top: 0;
+        .border-box();
+    }
+    ._header {
+        font-size: 0;
+        span {
+            display: inline-block;
+            vertical-align: top;
+            background-color: #efefef;
+            border-top: 1px solid #bbb;
+            border-bottom: 1px solid #e5e5e5;
+            border-right: 1px solid #e5e5e5;
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #363b3f;
+            .btn();
+            .border-box();
+
+            &:last-child {
+                border-right:0;
+            }
+
+            &.active {
+                border-top: 2px solid @color-primary;
+                background-color: #ffffff;
+                color: @color-primary;
+                border-bottom: 0;
+            }
+        }
+    }
+    .address-list {
+        font-size: 0;
+        padding: 10px 0;
+        text-align: left;
+        li {
+            display: inline-block;
+            vertical-align: top;
+            width: 90px;
+            padding: 0 10px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            .btn();
+            .border-box();
+            .text-overflow();
+        }
+    }
+
+    .ry-hidden {
+        display: none;
+    }
+}

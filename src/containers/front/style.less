@@ -1,0 +1,265 @@
+/**
+ * @desc 商城样式
+ * @author Jafeney
+ * @dateTime 2016-11-23
+ **/
+
+@charset "utf-8";
+
+@import './basic/reset.less';
+@import './basic/size.less';
+@import './basic/global.less';
+
+@g-color-grey1: #333; //适用于文字
+@g-color-grey2: #666; //适用于文字
+@g-color-grey3: #999; //适用于文字
+@g-color-grey4: #bebebe;
+@g-color-grey5: #cecece; //适用于导航下的分割线、按钮不可用等
+@g-color-grey6: #e4e4e4; //适用于分割线
+@g-color-grey7: #eee;
+@g-color-grey8: #f2f2f2; //使用于背景
+@g-color-grey9: #f9f9f9; //适用于导航栏背景
+@g-color-red1: #f15b6c;
+@g-color-red2: #ff002c;
+
+html {
+    background: @g-color-grey8;
+}
+
+.home {
+    max-width: 1280rem/@g-base;
+    background: @g-color-grey8;
+
+    .banner {
+        .banner-box {
+            height: 375.8rem/@g-base;
+            position: relative;
+            background: #fff;
+        }
+        .banner-img {
+            position: absolute;
+            width: 750rem/@g-base;
+            height: 375.8rem/@g-base;
+            left: 0;
+            top: 0;
+        }
+        .slick-slider {
+            padding-bottom: 15rem/@g-base;
+        }
+    }
+
+    .shortcuts {
+        font-size: 0;
+        text-align: center;
+        background: #fff;
+        padding-top: 15rem/@g-base;
+        padding-bottom: 20rem/@g-base;
+        padding-left: 40rem/@g-base;
+        padding-right: 40rem/@g-base;
+
+        .item {
+            display: inline-block;
+            vertical-align: top;
+            width: 670rem/@g-base/4;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 90rem/@g-base;
+            height: 90rem/@g-base;
+            line-height: 90rem/@g-base;
+            color: #fff;
+            border-radius: 45rem/@g-base;
+            .fontSize(44);
+        }
+
+        .label {
+            .fontSize(24);
+            line-height: 24rem/@g-base;
+            margin-top: 10rem/@g-base;
+            color: @g-color-grey3;
+        }
+
+    }
+
+    .activitys {
+        font-size: 0;
+        padding-bottom: 15rem/@g-base;
+
+        .item {
+            margin-top: 15rem/@g-base;
+            position: relative;
+        }
+        .title {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            height: 50rem/@g-base;
+            padding-top: 8rem/@g-base;
+            background-color: rgba(255,255,255,.9);
+            .border-box();
+            padding-left: 15rem/@g-base;
+            color: @g-color-grey2;
+
+            .tag {
+                display: inline-block;
+                vertical-align: bottom;
+                margin-right: 10rem/@g-base;
+                background: #45b97c;
+                width: 28rem/@g-base;
+                height: 28rem/@g-base;
+                line-height: 28rem/@g-base;
+                text-align: center;
+                color: #fff;
+                border-radius: 5rem/@g-base;
+                .fontSize(20);
+                position: relative;
+                top: 3rem/@g-base;
+            }
+
+            .txt {
+                display: inline-block;
+                vertical-align: bottom;
+                line-height: 22rem/@g-base;
+                .fontSize(22);
+                .text-overflow();
+            }
+        }
+        .img {
+            width: 750rem/@g-base;
+        }
+    }
+
+    .products {
+
+        .title {
+            background: @g-color-red1;
+            text-align: center;
+            height: 70rem/@g-base;
+            line-height: 70rem/@g-base;
+            color: #ffffff;
+            .fontSize(30);
+        }
+        .list {
+            font-size: 0;
+            padding-top: 15rem/@g-base;
+            padding-right: 15rem/@g-base;
+
+            .item {
+                font-size: 0;
+                background: #fff;
+                text-align: center;
+                display: inline-block;
+                width: 352.5rem/@g-base;
+                vertical-align: top;
+                margin-left: 15rem/@g-base;
+                margin-bottom: 15rem/@g-base;
+                padding-bottom: 10rem/@g-base;
+            }
+
+            .img {
+                width: 352.5rem/@g-base;
+                height: 352.5rem/@g-base;
+            }
+
+            p {
+                .border-box();
+                padding-left: 6rem/@g-base;
+                padding-right: 6rem/@g-base;
+                text-align: left;
+            }
+
+            .name {
+                .fontSize(24);
+                color: @g-color-grey2;
+                line-height: 26rem/@g-base;
+            	.text-overflow();
+                margin-top: 8rem/@g-base;
+            }
+
+            .price {
+                .fontSize(30);
+                color: @g-color-red1;
+            }
+        }
+    }
+}
+
+.door {
+    width: 750rem/@g-base;
+    height: 1334rem/@g-base;
+    background: url('/img/bg_door.jpg') no-repeat center center;
+    background-size: 750rem/@g-base 1334rem/@g-base;
+
+    .mask {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.6);
+    }
+
+    .modal {
+        position: absolute;
+        width: 600rem/@g-base;
+        height: 600rem/@g-base;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+
+        .input-row {
+            font-size: 0;
+            color: #fff;
+            margin-top: 20rem/@g-base;
+        }
+
+        .input-label {
+            width: 200rem/@g-base;
+            display: inline-block;
+            vertical-align: top;
+            .fontSize(30);
+            line-height: 60rem/@g-base;
+            height: 60rem/@g-base;
+        }
+
+        .select {
+            .fontSize(24);
+            border: 0;
+            outline: none;
+            margin-left: 20rem/@g-base;
+            width: 380rem/@g-base;
+            height: 60rem/@g-base;
+            display: inline-block;
+            vertical-align: top;
+            padding: 15rem/@g-base;
+            color: @g-color-grey2;
+            background: #fff;
+        }
+
+        .input {
+            .fontSize(24);
+            height: 60rem/@g-base;
+            width: 380rem/@g-base;
+            margin-left: 20rem/@g-base;
+            border-radius: 5rem/@g-base;
+            display: inline-block;
+            vertical-align: top;
+            padding: 15rem/@g-base;
+            color: @g-color-grey2;
+        }
+
+        .input-submit {
+            display: block;
+            width: 600rem/@g-base;
+            height: 70rem/@g-base;
+            .fontSize(30);
+            line-height: 70rem/@g-base;
+            background: #dea32c;
+            margin-top: 40rem/@g-base;
+            text-align: center;
+            border-radius: 10rem/@g-base;
+            color: #fff;
+        }
+    }
+}

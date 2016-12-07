@@ -1,0 +1,188 @@
+/**
+ * @desc mixins.less类库里定义了一些常用的混合方法 
+ * @特别说明：下面定义的很多 浏览器前缀补全的方法 最终没有使用到类库中，
+ * 而是改用 autoprefixer插件 结合gulp进行预编译。
+ * 这么做的理由有三个：
+ * (1) 代码精简易于维护，降低了阅读门槛 
+ * (2) 前缀补全方案 智能可选 "last 2 version"、“last 1 version”等 
+ * (3) 类库代码量级上大幅度降低，符合移动端轻量化的原则 
+ * ;
+ */
+
+// !Transitions 
+.transition(@transition) {
+    -webkit-transition: @transition; 
+    -moz-transition: @transition;
+	-o-transition: @transition;
+	-ms-transition: @transition;
+	transition: @transition;
+}
+
+.transition-delay(@transition-delay) {
+	-webkit-transition-delay: @transition-delay;
+	-moz-transition-delay: @transition-delay;
+	-o-transition-delay: @transition-delay;
+	-ms-transition-delay: @transition-delay;
+	transition-delay: @transition-delay;
+}
+
+// !Animations 
+.animation(@name, @duration, @delay, @function) {
+	-webkit-animation: @name @duration @delay @function;
+	-moz-animation: @name @duration @delay @function;
+	-o-animation: @name @duration @delay @function;
+	-ms-animation: @name @duration @delay @function;
+	animation: @name @duration @delay @function;
+}
+
+.animation-name(@animation-name) {
+	-webkit-animation-name: @animation-name;
+	-moz-animation-name: @animation-name;
+	-ms-animation-name: @animation-name;
+	-o-animation-name: @animation-name;
+	animation-name: @animation-name;
+}
+
+.animation-timing-function(@animation-timing-function) {
+	-webkit-animation-timing-function: @animation-timing-function;
+	-moz-animation-timing-function: @animation-timing-function;
+	-ms-animation-timing-function: @animation-timing-function;
+	-o-animation-timing-function: @animation-timing-function;
+	animation-timing-function: @animation-timing-function;
+}
+
+.animation-duration(@animation-duration) {
+	-webkit-animation-duration: @animation-duration;
+	-moz-animation-duration: @animation-duration;
+	-ms-animation-duration: @animation-duration;
+	-o-animation-duration: @animation-duration;
+	animation-duration: @animation-duration;
+}
+
+.animation-delay(@animation-delay) {
+	-webkit-animation-delay:@animation-delay;
+	-moz-animation-delay:@animation-delay;
+	-ms-animation-delay:@animation-delay;
+	-o-animation-delay:@animation-delay;
+	animation-delay:@animation-delay;
+}
+
+.animation-iteration-count(@animation-iteration-count) {
+	-webkit-animation-iteration-count: @animation-iteration-count;
+	-moz-animation-iteration-count: @animation-iteration-count;
+	-ms-animation-iteration-count: @animation-iteration-count;
+	-o-animation-iteration-count: @animation-iteration-count;
+	animation-iteration-count: @animation-iteration-count;
+}
+
+.animation-fill-mode(@animation-fill-mode) {
+	-webkit-animation-fill-mode: @animation-fill-mode;
+	-moz-animation-fill-mode: @animation-fill-mode;
+	-ms-animation-fill-mode: @animation-fill-mode;
+	-o-animation-fill-mode: @animation-fill-mode;
+	animation-fill-mode: @animation-fill-mode;
+}
+
+// !Transformations 
+.rotate(@degrees) {
+	-webkit-transform: rotate(@degrees);
+	-moz-transform: rotate(@degrees);
+	-ms-transform: rotate(@degrees);
+	-o-transform: rotate(@degrees);
+}
+
+.scale(@ratio) {
+	-webkit-transform: scale(@ratio);
+	-moz-transform: scale(@ratio);
+	-ms-transform: scale(@ratio);
+	-o-transform: scale(@ratio);
+	transform: scale(@ratio);
+}
+
+.translate(@x, @y) {
+	-webkit-transform: translate(@x, @y);
+	-moz-transform: translate(@x, @y);
+	-ms-transform: translate(@x, @y);
+	-o-transform: translate(@x, @y);
+	transform: translate(@x, @y);
+}
+
+.skew(@x, @y) {
+	-webkit-transform: skew(@x, @y);
+	-moz-transform: skew(@x, @y);
+	-ms-transform: skewX(@x) skewY(@y);
+	-o-transform: skew(@x, @y);
+	transform: skew(@x, @y);
+	-webkit-backface-visibility: hidden;
+}
+
+.translate3d(@x,@y,@z) {
+	-webkit-transform: translate3d(@x,@y,@z);
+	-moz-transform: translate3d(@x,@y,@z);
+	-ms-transform: translate3d(@x,@y,@z);
+	-o-transform: translate3d(@x,@y,@z);
+	transform: translate3d(@x,@y,@z);
+}
+
+.scale3d(@x,@y,@z) {
+	-webkit-transform: scale3d(@x,@y,@z);
+	-moz-transform: scale3d(@x,@y,@z);
+	-ms-transform: scale3d(@x,@y,@z);
+	-o-transform: scale3d(@x,@y,@z);
+    transform: scale3d(@x,@y,@z)
+}
+
+.perspective(@value: 1000) {
+	-webkit-perspective: @value;
+	-moz-perspective: @value;
+	-ms-perspective: @value;
+	-o-perspective: @value;
+	perspective: @value;
+}
+
+.transform-origin(@x, @y) {
+	-webkit-transform-origin: @x @y;
+	-moz-transform-origin: @x @y;
+	-ms-transform-origin: @x @y;
+	-o-transform-origin: @x @y;
+	transform-origin: @x @y;
+}
+
+.transform (...) {
+	-webkit-transform: @arguments;
+	-moz-transform: @arguments;
+	-ms-transform: @arguments;
+	-o-transform: @arguments;
+	transform: @arguments;
+}
+
+// !Backface visibility
+.backface-visibility(@visibility) {
+	-webkit-backface-visibility: @visibility;
+	-moz-backface-visibility: @visibility;
+	-ms-backface-visibility: @visibility;
+	-o-backface-visibility: @visibility;
+	backface-visibility: @visibility;
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
