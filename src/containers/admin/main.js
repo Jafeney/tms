@@ -38,7 +38,11 @@ class Main extends Component {
         this.refs.pageName.setValue('')
         this.refs.pageCode.setValue('')
         this.refs.pageColor.setValue('')
-        this.modal.show()
+        this.addModal.show()
+    }
+
+    handleQrcode() {
+        this.qrModal.show()
     }
 
     handleModalSubmit() {
@@ -51,8 +55,7 @@ class Main extends Component {
             },
             success: () => {
                 this.pop.show()
-                this.modal.close()
-
+                this.addModal.close()
                 actions.getPageNames({})
             },
             error: (message) => {
@@ -122,13 +125,13 @@ class Main extends Component {
                         </h2>
                     </div>
                     <div onClick={()=>this.handleAdd()} className="fast-btn"><Icon name="plus" /></div>
-                    <div onClick={()=>this.handleAdd()} className="fast-btn show"><Icon name="qrcode" /></div>
+                    <div onClick={()=>this.handleQrcode()} className="fast-btn show"><Icon name="qrcode" /></div>
                 </div>
                 <div className="container">
                     {this.props.children}
                 </div>
                 <Modal title={"添加企业"} style={{width: 420, height: 270}}
-                    ref={(ref)=> this.modal = ref}>
+                    ref={(ref)=> this.addModal = ref}>
                     <p style={{fontSize:'14px', paddingTop: '10px', paddingLeft: '10px'}}>
                         <Input name="企业名称" ref="pageName" placeholder="输入该企业的名称，如中国电信" style={{width: '280px'}} wrapStyle={{marginBottom: '10px', display: 'block'}}/>
                         <Input name="主题颜色" ref="pageColor" placeholder="输入一个十六进制的颜色, 如#f3f3f3" style={{width: '280px'}} wrapStyle={{marginBottom: '10px', display: 'block'}}/>
@@ -136,11 +139,11 @@ class Main extends Component {
                     </p>
                     <p className="footer">
                         <Button text="确定" callback={()=>this.handleModalSubmit()} type="primary" style={{marginRight: 10}} />
-                        <Button text="取消" callback={()=>this.modal.close()} type="ghost" />
+                        <Button text="取消" callback={()=>this.addModal.close()} type="ghost" />
                     </p>
                 </Modal>
                 <Modal title={"打开微信扫一扫"} style={{width: 400, height: 300}}
-                    ref={(ref)=> this.modal = ref}>
+                    ref={(ref)=> this.qrModal = ref}>
                     <p style={{textAlign: 'center'}}>
                         <img src="/img/qrcode.jpg" style={{width: '200px'}} />
                     </p>
