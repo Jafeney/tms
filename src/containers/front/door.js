@@ -53,7 +53,7 @@ class Door extends Component {
                             <input ref="code" placeholder="输入您的邀请码" type="number" className="input" />
                         </div>
                         <div onClick={()=>this.toHome()}
-                            className="input-submit">抢福利</div>
+                            className="input-submit">抢福利（仅对合作企业开放）</div>
                     </Animation>
                 </div>
             </div>
