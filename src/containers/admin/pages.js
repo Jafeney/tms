@@ -62,13 +62,13 @@ class PageContainer extends Component {
         if (error) return error
         return (
             <div className="ry-tabs page">
-                <div style={{overflow: 'hidden', width: '1170px', height: '55px',margin: "auto",}}>
+                {/* <div style={{overflow: 'hidden', width: '1170px', height: '55px',margin: "auto",}}> */}
                     <div style={{overflow: 'hidden', width: '1170px', height: '75px',margin: "auto", overflowX: 'scroll'}}>
                         <ul className="ry-tabs-header" style={{maxWidth: '5000px', width: '5000px'}}>
                             {this._renderTabHeader(pageNames)}
                         </ul>
                     </div>
-                </div>
+                {/* </div> */}
                 <ul className="ry-tabs-mainer">
                     {this.props.children}
                 </ul>

@@ -239,8 +239,8 @@ module.exports = router;
 
 ```JavaScript
 "dependencies": {
-  "babel-polyfill": "^6.16.0",
-  "immutable": "^3.8.1",
+  "babel-polyfill": "^6.16.0",   
+  "immutable": "^3.8.1",          
   "isomorphic-fetch": "^2.2.1",
   "react": "^15.4.1",
   "react-dom": "^15.4.1",
@@ -269,11 +269,180 @@ module.exports = router;
   "webpack": "^1.13.3"
 }
 ```
+
 ### 玩玩babel
+`react`使用`babel`除了安装依赖，`.babelrc`的配置还有个注意点，为了支持JSX和ES2015的最新提案，`presets`需要这么写：
+
+```JavaScript
+{ "presets": ["es2015","react","stage-0"] }
+```
+
 ### 耍耍webpack
-### React-Router怎么玩
+`webpack`比`gulp`要好用不少，下面是这个架构下的`webpack.config.js`写法：
+
+```JavaScript
+/**
+ * @desc 项目webpack配置文件
+ * @author Jafeney <692270687@qq.com>
+ **/
+
+var webpack = require('webpack');
+var path = require('path');
+var nodeModulesPath = path.join(__dirname, '/node_modules');
+
+module.exports = {
+    entry: {
+        admin: './src/entries/admin',
+        front: './src/entries/front',
+        // 作为外部模块,不打包到webpack的主文件
+        vendor: ['react', 'react-dom', 'redux'],
+    },
+    output: {
+        path: path.join(__dirname, '/public/build'),
+        publicPath: '/assets/',
+        filename: '[name].bundle.js'
+    },
+    module: {
+        noParse: [
+            path.join(nodeModulesPath, '/react/dist/react.min'),
+            path.join(nodeModulesPath, '/react-dom/dist/react-dom.min'),
+            path.join(nodeModulesPath, '/redux/dist/redux.min'),
+        ],
+        loaders: [
+            { test: /\.less$/, loader: 'style!css!less' },
+            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+            { test: /\.(gif|jpg|png)$/, loader: 'url?limit=8192&name=images/[name].[hash].[ext]' },
+            { test: /\.(woff|svg|eot|ttf)$/, loader: 'url?limit=50000&name=fonts/[name].[hash].[ext]' }
+        ]
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        // new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }), // 版本上线时开启
+        new webpack.optimize.CommonsChunkPlugin('common.js'),  // 抽取公共部分
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.NoErrorsPlugin()
+    ]
+}
+```
+
+> 注意入口文件有三个：admin、front和vendor。admin是管理后台的入口、front是前台商城的入口、vender则是把react、react-dom、redux这三个大的依赖模块单独抽离成一个文件，这样可以大大减小webpack打包后文件的大小。还有一个技巧是 commonsChunkPlugin() 这个插件，它可以再次抽取输入文件的公共部分，再次减小这三个文件的大小，然后利用浏览器的并行加载能力，稍稍加快整个项目的加载速度。
+
+#### 打包后的模块怎么引？
+前面也说到在后端的`Views`目录里**商城主页**和**管理后台**对应的模版视图分别是 `index.ejs` 和 `admin.ejs`，而`webpack`打包好的文件会作为静态资源放在public的build目录下：
+
+商城视图入口 `index.ejs `(移动端)
+```HTML
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title id="page_title">你的网站名称</title>
+        <meta name="description" content="你的网站名称" />
+        <meta name="keywords" content="商城,福利" />
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="telephone=no" name="format-detection" />
+        <meta content="email=no" name="format-detection" />
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <link rel="shortcut icon" type="image/x-icon" href="http://xiangke.da56.com/static/img/xiangke.ico" media="screen" />
+        <link href="http://xiangke.da56.com/static/img/xiangke.ico" rel="apple-touch-icon">
+        <link rel="stylesheet" href="http://www.da56.com/static/css/loader.css">
+        <script type="text/javascript">
+            !function(j){function i(){j.rem=m.getBoundingClientRect().width/16,m.style.fontSize=j.rem+"px"}var p,o=j.navigator.appVersion.match(/iphone/gi)?j.devicePixelRatio:1,n=1/o,m=document.documentElement,l=document.createElement("meta");if(j.dpr=o,j.addEventListener("resize",function(){clearTimeout(p),p=setTimeout(i,300)},!1),j.addEventListener("pageshow",function(b){b.persisted&&(clearTimeout(p),p=setTimeout(i,300))},!1),m.setAttribute("data-dpr",o),l.setAttribute("name","viewport"),l.setAttribute("content","initial-scale="+n+", maximum-scale="+n+", minimum-scale="+n+", user-scalable=no"),m.firstElementChild){m.firstElementChild.appendChild(l)}else{var k=document.createElement("div");k.appendChild(l),document.write(k.innerHTML)}i()}(window);
+        </script>
+    </head>
+    <body>
+        <div id="root">
+            <div id="floatBarsG">
+                <div id="floatBarsG_1" class="floatBarsG"></div>
+                <div id="floatBarsG_2" class="floatBarsG"></div>
+                <div id="floatBarsG_3" class="floatBarsG"></div>
+                <div id="floatBarsG_4" class="floatBarsG"></div>
+                <div id="floatBarsG_5" class="floatBarsG"></div>
+                <div id="floatBarsG_6" class="floatBarsG"></div>
+                <div id="floatBarsG_7" class="floatBarsG"></div>
+                <div id="floatBarsG_8" class="floatBarsG"></div>
+            </div>
+        </div>
+        <script src="/build/common.js"></script>
+        <script src="/build/vendor.bundle.js"></script>
+        <script src="/build/front.bundle.js"></script>
+    </body>
+</html>
+```
+> 这里我简要说明一下，上面的 head 部分把移动端适配（包括rem布局）的工作都做了，有了它，移动端你直接就可以用rem进行布局了，具体怎么玩我下面会介绍。
+
+可能有人对 `floatBarsG` 这一层有疑问。这其实是为了解决单页应用加载时的白屏做得CSS3加载动画，配合head的`loader.css`可以有一个不错的加载效果（你可以自己定制一套）。
+
+后台不需要做移动适配，head部分就简单多了：
+
+```HTML
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>管理后台</title>
+        <link rel="stylesheet" href="http://www.da56.com/static/css/loader.css">
+        <link rel="shortcut icon" href="http://www.da56.com/src/images/icon.ico" />
+    </head>
+    <body>
+        <div id="root">
+            <div id="floatBarsG">
+                <div id="floatBarsG_1" class="floatBarsG"></div>
+                <div id="floatBarsG_2" class="floatBarsG"></div>
+                <div id="floatBarsG_3" class="floatBarsG"></div>
+                <div id="floatBarsG_4" class="floatBarsG"></div>
+                <div id="floatBarsG_5" class="floatBarsG"></div>
+                <div id="floatBarsG_6" class="floatBarsG"></div>
+                <div id="floatBarsG_7" class="floatBarsG"></div>
+                <div id="floatBarsG_8" class="floatBarsG"></div>
+            </div>
+        </div>
+        <script src="/build/vendor.bundle.js"></script>
+        <script src="/build/admin.bundle.js"></script>
+    </body>
+</html>
+```
+
 ### 我的Redux玩法
+`redux`也不是什么神秘的东西啦，不过相比 `flux` 确实好用不少，尤其是处理业务逻辑的能力和对store的管理都比较好用。
+
+#### 前端目录结构
+
+```JavaScript
+|----src/                   /*前端代码尽在此目录下*/    
+  |----components/          /**/
+  |----containers/
+    |----admin/
+      |----login.js
+      |----style.less
+    |----front/
+      |----basic/
+      |----home.js
+      |----style.less
+  |----entries/
+    |----admin.js
+    |----front.js
+  |----mixins/
+    |----helper.js
+    |----pure-render.js
+  |----redux/
+    |----actions/
+    |----reducers/
+  |----routes/
+  |----config.js             /*前端配置文件*/
+```
+
+#### 移动端和PC端的less怎么组织
+
+#### React-Router怎么玩
+`React-Router`也不神秘，其实就是前端路由的一层封装，配置也很简单。这里因为结合`redux`来使用，所以稍稍有点不同：
+
 ### 有个得心应手的组件库
 
 ## 用git进行托管
+
 ## 部署到服务器
