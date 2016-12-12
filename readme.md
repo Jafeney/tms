@@ -592,7 +592,7 @@ export const carousel = createReducer(Immutable.fromJS({preload: false}), {
 > 注意：如果`Immutable`对象是个`List`，必须先`map()`一下，然后再用`get()`方法取值。
 
 ### 有个得心应手的组件库 
-`React`搞得快一年了，前段时间也自己写了个组件库`Royal`，不过一直疲于新业务开发，没有很好地整理文档和维护，挺可惜的，不过我开发新项目还是把Royal运用起来，对于有问题的组件进行修改和优化。唉，也是力不从心，期待有人能帮我打理打理吧 ^o^。在此推荐几个时尚的组件库吧：
+`React`搞得快一年了，前段时间也自己写了个组件库 `Royal`，不过一直疲于新业务开发，没有很好地整理文档和维护，挺可惜的，不过我开发新项目还是把Royal运用起来，对于有问题的组件进行修改和优化。唉，也是力不从心，期待有人能帮我打理打理吧 ^o^。在此推荐几个时尚的组件库吧：
 #### Antd 
 蚂蚁金服开发一个比较全面的React组件库，我以前也推荐过，确实蛮不错，唯一的痛点应该是它的源码，学习起来比较费劲。
 文档地址： https://ant.design/docs/react/introduce 
@@ -634,3 +634,7 @@ $ git push -u origin master
 ```
 
 > 实例项目`github`地址: https://github.com/Jafeney/tms （代码仅供参考，切勿商用）
+
+--- 
+
+@欢迎关注我的 [github](https://github.com/jafeney) 和 [个人博客 －Jafeney](http://jafeney.com)
