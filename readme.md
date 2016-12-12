@@ -14,6 +14,7 @@
 $ express -e myapp && cd myapp && npm install
 ```
 这样服务端的雏形就有了：
+
 ```JavaScript
 |----myapp
    |----bin/
@@ -335,6 +336,7 @@ module.exports = {
 前面也说到在后端的`Views`目录里**商城主页**和**管理后台**对应的模版视图分别是 `index.ejs` 和 `admin.ejs`，而`webpack`打包好的文件会作为静态资源放在public的build目录下：
 
 商城视图入口 `index.ejs `(移动端)
+
 ```HTML
 <!DOCTYPE html>
 <html>
@@ -414,35 +416,221 @@ module.exports = {
 
 ```JavaScript
 |----src/                   /*前端代码尽在此目录下*/    
-  |----components/          /**/
-  |----containers/
-    |----admin/
-      |----login.js
-      |----style.less
-    |----front/
-      |----basic/
-      |----home.js
-      |----style.less
-  |----entries/
-    |----admin.js
-    |----front.js
-  |----mixins/
-    |----helper.js
-    |----pure-render.js
-  |----redux/
-    |----actions/
-    |----reducers/
-  |----routes/
-  |----config.js             /*前端配置文件*/
+  |----components/          /*项目用到的组件*/
+  |----containers/          /*页面容器*/
+    |----admin/             /*管理后台的页面容器*/
+      |----login.js         /*登录页面容器，以这个为例*/
+      |----style.less       /*管理后台样式，统一写在这个less里*/
+    |----front/             /*前台商城的页面容器*/
+      |----basic/           /*基础样式*/
+        |----global.less    /*全局通用样式以及变量*/
+        |----reset.less     /*页面初始化的样式*/
+        |----size.less      /*字体已经rem配置*/
+      |----home.js          /*商城主页容器，以这个为例*/
+      |----style.less       /*前台商城的样式，统一写在这个less里*/
+  |----entries/             /*入口*/
+    |----admin.entry.js     /*后台入口*/
+    |----front.entry.js     /*前台入口*/
+  |----mixins/              /*混入方法*/
+    |----helper.js          /*前端使用的工具方法*/
+    |----pure-render.js     /*加载优化*/
+  |----redux/               /*redux*/
+    |----actions/           /*actions*/
+    |----reducers/          /*reducers*/
+    |----configStore.js     /*store配置*/
+    |----types.js           /*store定义*/
+  |----routes/              /*前端路由*/
+    |----admin.route.js     /*管理后台路由*/
+    |----front.route.js     /*前台商城路由*/
+  |----config.js            /*前端配置文件*/
 ```
 
-#### 移动端和PC端的less怎么组织
+#### 关于布局 
+PC端随意些，可以用像素布局。这里说说移动端，正好结合 `rem` 说说这套布局的玩法：
 
-#### React-Router怎么玩
-`React-Router`也不神秘，其实就是前端路由的一层封装，配置也很简单。这里因为结合`redux`来使用，所以稍稍有点不同：
+前文在 `head` 部分已经给页面的 `html`标签定义了 `data-dpr` 和 `font-size`作为基准单位。 再结合下面这套`less`版的尺寸方案：
 
-### 有个得心应手的组件库
+```less 
+// @desc    提供 750px尺寸的 尺寸 （包括字体大小）的一些常用方法
+// 为什么不使用rem 设置字体？
+// 参见 https://github.com/imweb/mobile/issues/3
+@g-base: 46.875rem;
+@g-font-base: 40rem;
+.px2px(@name, @px){
+    @{name}: round(@px / 2) * 1px;
+    [data-dpr="2"] & {
+        @{name}: @px * 1px;
+    }
+    // for mx3
+    [data-dpr="2.5"] & {
+        @{name}: round(@px * 2.5 / 2) * 1px;
+    }
+    // for 小米note
+    [data-dpr="2.75"] & {
+        @{name}: round(@px * 2.75 / 2) * 1px;
+    }
+    [data-dpr="3"] & {
+        @{name}: round(@px / 2 * 3) * 1px
+    }
+    // for 三星note4
+    [data-dpr="4"] & {
+        @{name}: @px * 2px;
+    }
+}
+.px2rem(@name, @px) {
+    @{name}: (@px / 46.875) * 1rem;
+}
+//margin,padding, border可以使用这个设置两个值
+.mpb(@name, @px, @py) {
+    @{name}: (@px / 46.875) * 1rem (@py / 46.875) * 1rem;
+}
+.fontSize(@px) {
+    .px2px(font-size, @px);
+}
 
-## 用git进行托管
+.size(@thesize) {
+    width: @thesize;
+    height: @thesize;
+}
 
-## 部署到服务器
+.size(@width, @height) {
+    width: @width;
+    height: @height;
+}
+``` 
+
+大家知道UI给出的移动端设计稿一般是 `2x` 规格的，以 `Iphone6`的375宽度为例，设计给出的一般是750，那么我们在用rem布局时，宽度就是：
+
+```
+   750rem/@g-base
+```
+
+并且它会自动适配`Iphone`各个尺寸和常用的`Android`屏幕，省时省心。
+
+#### `React-Router`怎么玩
+`React-Router`也不神秘，其实就是前端路由的一层封装，配置也很简单。这里因为结合`redux`来使用，所以稍稍有点不同，拿前台商城为例吧：
+
+`front.entry.js`
+
+```JavaScript
+/**
+ * @desc 商城入口
+ * @author Jafeney <692270687@qq.com>
+ **/
+import React from 'react'
+import { render } from 'react-dom'
+// redux
+import { Provider } from 'react-redux'
+// router
+import { Router, hashHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
+import routes from '../routes/front'
+import configureStore from '../redux/configureStore'
+
+const store = configureStore(hashHistory)
+const history = syncHistoryWithStore(hashHistory, store)
+
+render(
+    (
+        <Provider store={store}>
+            <Router history={history} routes={routes} />
+        </Provider>
+    ), document.getElementById('root')
+)
+
+```
+
+`front.route.js`
+
+```JavaScript
+/**
+ * @desc 项目路由设置
+ * @author Jafeney <692270687@qq.com>
+ **/
+
+import React from 'react'
+import { Route } from 'react-router'
+
+import Door from '../containers/front/door'
+import Home from '../containers/front/home'
+
+const routes = (
+    <Route>
+        <Route path="/" component={Door} />
+        <Route path="/home" component={Home} />
+    </Route>
+);
+
+export default routes
+
+```
+
+#### 用`Immutable`管理你的`reducers` 
+`Immutable`之前也有单独介绍过，可以提高对象的取值效率，这里主要是和 `reducer` 结合使用，举个例子：
+
+```JavaScript
+/**
+ * @desc 轮播 reducer
+ **/
+
+import Immutable from 'immutable';
+import * as TYPES from '../types'
+import { createReducer } from 'redux-immutablejs'
+
+export const carousel = createReducer(Immutable.fromJS({preload: false}), {
+    [TYPES.CAROUSEL_UPDATE]: (state, action) => {
+        return state.set('preload', true).merge(Immutable.fromJS(action.result))
+    },
+    [TYPES.CAROUSEL_CLEAN]: (state, action) => {
+        return state.clear().set('preload', false)
+    }
+})
+```
+
+然后我们在页面里可以用 `.get('@name')` 来获取对象的属性。 
+
+> 注意：如果`Immutable`对象是个`List`，必须先`map()`一下，然后再用`get()`方法取值。
+
+### 有个得心应手的组件库 
+`React`搞得快一年了，前段时间也自己写了个组件库`Royal`，不过一直疲于新业务开发，没有很好地整理文档和维护，挺可惜的，不过我开发新项目还是把Royal运用起来，对于有问题的组件进行修改和优化。唉，也是力不从心，期待有人能帮我打理打理吧 ^o^。在此推荐几个时尚的组件库吧：
+#### Antd 
+蚂蚁金服开发一个比较全面的React组件库，我以前也推荐过，确实蛮不错，唯一的痛点应该是它的源码，学习起来比较费劲。
+文档地址： https://ant.design/docs/react/introduce 
+
+#### Material-UI 
+UI设计比较酷炫的一款React组件库, 官网地址： http://www.material-ui.com/ 
+
+#### Grommet 
+扁平风格的React组件库，官网地址： https://grommet.github.io/
+
+## 用git进行托管 
+三方托管代码是个好习惯，有效防止代码丢失或者出错后回滚。
+
+```Shell
+
+/*Git 全局设置*/
+
+$ git config --global user.name "Jafeney"
+$ git config --global user.email "692270687@qq.com"
+
+/*创建新版本库*/
+
+$ git clone git@code.aliyun.com:b2b/test.git
+$ cd test
+$ touch README.md
+$ git add README.md
+$ git commit -m "add README"
+$ git push -u origin master
+
+/*已存在的文件夹或 Git 仓库*/
+
+$ cd existing_folder
+$ git init
+$ git remote add origin git@code.aliyun.com:b2b/test.git
+$ git add .
+$ git commit
+$ git push -u origin master
+
+```
+
+> 实例项目`github`地址: https://github.com/Jafeney/tms （代码仅供参考，切勿商用）
