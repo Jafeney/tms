@@ -18,7 +18,7 @@ import { PRODUCTS } from '../../../database/columns'
 // redux
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { limitStringlength } from '../../mixins/helper'
+import { limitStringlength, parseURL } from '../../mixins/helper'
 import { getProduct, addProduct, updateProduct, deleteProduct } from '../../redux/actions/product'
 
 class Product extends Component {
@@ -67,7 +67,7 @@ class Product extends Component {
             body: {
                 pid: currentPage.get('id'),
                 img: this.refs.pt_img_new.getValue(),
-                link: this.refs.pt_link_new.getValue(),
+                link: parseURL(this.refs.pt_link_new.getValue()),
                 name: this.refs.pt_name_new.getValue(),
                 price: this.refs.pt_price_new.getValue(),
             },
@@ -89,7 +89,7 @@ class Product extends Component {
             body: {
                 id: currentRow.get('pt_id'),
                 img: this.refs.pt_img.getValue(),
-                link: this.refs.pt_link.getValue(),
+                link: parseURL(this.refs.pt_link.getValue()),
                 name: this.refs.pt_name.getValue(),
                 price: this.refs.pt_price.getValue(),
             },

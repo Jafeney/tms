@@ -15,6 +15,11 @@ export function bodyUrlencoded(body) {
     return str
 }
 
+export function parseURL(url) {
+    let _url = url.replace(/&/g,'*')
+    return _url
+}
+
 export function limitStringlength(str, length) {
     return str.substr(0, length) + '...'
 }

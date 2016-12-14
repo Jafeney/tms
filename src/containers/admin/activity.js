@@ -17,7 +17,7 @@ import { ACTIVITYS } from '../../../database/columns'
 // redux
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { limitStringlength } from '../../mixins/helper'
+import { limitStringlength, parseURL } from '../../mixins/helper'
 import { getActivity, addActivity, updateActivity, deleteActivity } from '../../redux/actions/activity'
 
 class Activity extends Component {
@@ -65,7 +65,7 @@ class Activity extends Component {
             body: {
                 pid: currentPage.get('id'),
                 img: this.refs.a_img_new.getValue(),
-                link: this.refs.a_link_new.getValue(),
+                link: parseURL(this.refs.a_link_new.getValue()),
                 title: this.refs.a_title_new.getValue(),
             },
             success: () => {
@@ -87,7 +87,7 @@ class Activity extends Component {
             body: {
                 id: currentRow.get('a_id'),
                 img: this.refs.a_img.getValue(),
-                link: this.refs.a_link.getValue(),
+                link: parseURL(this.refs.a_link.getValue()),
                 title: this.refs.a_title.getValue(),
             },
             success: () => {

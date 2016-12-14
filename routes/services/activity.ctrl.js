@@ -60,6 +60,7 @@ module.exports = {
     // 更新单条活动信息
     doPutActivityById: function(req, res) {
         var props = req.body;
+        props.link = helper.deParseURL(props.link);
         var activity = new Activity({ props: props });
         activity.putActivityById(function(err, data) {
             if (data.changedRows >= 0) {
@@ -98,6 +99,7 @@ module.exports = {
     // 添加一条记录
     doAddActivity: function(req, res) {
         var props = req.body;
+        props.link = helper.deParseURL(props.link);
         var activity = new Activity({props: props});
         activity.addActivity(function(err, data) {
             if (data.insertId > 0) {

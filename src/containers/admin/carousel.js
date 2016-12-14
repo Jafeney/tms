@@ -13,6 +13,8 @@ import Modal from '../../royal/Views/Modal/'
 import PopUp from '../../royal/Views/PopUp/'
 import { CAROUSEL } from '../../../database/columns'
 
+import { parseURL } from '../../mixins/helper'
+
 // redux
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -43,7 +45,7 @@ class Carousel extends Component {
             body: {
                 pid: currentPage.get('id'),
                 img: this.refs.c_img_new.getValue(),
-                link: this.refs.c_link_new.getValue()
+                link: parseURL(this.refs.c_link_new.getValue())
             },
             success: () => {
                 this.pop.show()
@@ -63,7 +65,7 @@ class Carousel extends Component {
             body: {
                 id: currentRow.get('c_id'),
                 img: this.refs.c_img.getValue(),
-                link: this.refs.c_link.getValue()
+                link: parseURL(this.refs.c_link.getValue())
             },
             success: () => {
                 this.pop.show()

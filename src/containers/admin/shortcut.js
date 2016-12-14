@@ -17,7 +17,7 @@ import { SHORTCUTS } from '../../../database/columns'
 // redux
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { limitStringlength } from '../../mixins/helper'
+import { limitStringlength, parseURL } from '../../mixins/helper'
 import { getShortcut, addShortcut, updateShortcut, deleteShortcut } from '../../redux/actions/shortcut'
 
 class Shortcut extends Component {
@@ -51,7 +51,7 @@ class Shortcut extends Component {
             body: {
                 pid: currentPage.get('id'),
                 icon: this.refs.s_icon_new.getValue(),
-                link: this.refs.s_link_new.getValue(),
+                link: parseURL(this.refs.s_link_new.getValue()),
                 name: this.refs.s_name_new.getValue(),
                 color: this.refs.s_color_new.getValue()
             },
@@ -73,7 +73,7 @@ class Shortcut extends Component {
             body: {
                 id: currentRow.get('s_id'),
                 icon: this.refs.s_icon.getValue(),
-                link: this.refs.s_link.getValue(),
+                link: parseURL(this.refs.s_link.getValue()),
                 name: this.refs.s_name.getValue(),
                 color: this.refs.s_color.getValue()
             },

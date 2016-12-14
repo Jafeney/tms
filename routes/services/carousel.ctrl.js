@@ -60,6 +60,7 @@ module.exports = {
     // 更新一条Carousel信息
     doPutCarouselById: function(req, res) {
         var props = req.body;
+        props.link = helper.deParseURL(props.link);
         var carousel = new Carousel({props: props});
         carousel.putCarouselById(function(err, data) {
             if (data.changedRows >= 0) {
@@ -98,6 +99,7 @@ module.exports = {
     // 添加一条记录
     doAddCarousel: function(req, res) {
         var props = req.body;
+        props.link = helper.deParseURL(props.link);
         var carousel = new Carousel({props: props});
         carousel.addCarousel(function(err, data) {
             if (data.insertId > 0) {

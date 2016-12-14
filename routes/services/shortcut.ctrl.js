@@ -60,6 +60,7 @@ module.exports = {
     // 更新单条图标信息
     doPutShortcutById: function(req, res) {
         var props = req.body;
+        props.link = helper.deParseURL(props.link);
         var shortcut = new Shortcut({ props: props });
         shortcut.putShortcutById(function(err, data) {
             if (data.changedRows >= 0) {
@@ -98,6 +99,7 @@ module.exports = {
     // 添加一条记录
     doAddShortcut: function(req, res) {
         var props = req.body;
+        props.link = helper.deParseURL(props.link);
         var shortcut = new Shortcut({props: props});
         shortcut.addShortcut(function(err, data) {
             if (data.insertId > 0) {

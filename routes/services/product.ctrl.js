@@ -60,6 +60,7 @@ module.exports = {
     // 更新单个产品信息
     doPutProductById: function(req, res) {
         var props = req.body;
+        props.link = helper.deParseURL(props.link);
         var product = new Product({props: props});
         product.putProductById(function(err, data) {
             if (data.changedRows >= 0) {
@@ -98,6 +99,7 @@ module.exports = {
     // 添加一个产品
     doAddProduct: function(req, res) {
         var props = req.body;
+        props.link = helper.deParseURL(props.link);
         var product = new Product({props: props});
         product.addProduct(function(err, data) {
             if (data.insertId > 0) {

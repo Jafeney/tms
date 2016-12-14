@@ -53,7 +53,7 @@ var helper = {
     },
 
     // 执行sql语句
-    db_query(opt) {
+    db_query: function(opt) {
         opt.connect.query(opt.sql, function(err, res) {
     		if (err) {
     			console.log(`${opt.name} err: + ${err}`);
@@ -65,6 +65,11 @@ var helper = {
     		}
     	});
     },
+
+    // 反处理URL
+    deParseURL:  function(url) {
+        return url.replace(/\*/g, '&')
+    }
 
 };
 

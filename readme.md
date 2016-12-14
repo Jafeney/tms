@@ -7,6 +7,8 @@
 ## 快速搭建
 本打算弄个脚手架工具，但是出于教学的目的，还是一步步地告诉大家怎么搭这个全栈式的框架。
 
+<!--more-->
+
 ### 用`express`生成服务端雏形
 会点`Node`的应该对`express`不陌生，模版引擎我习惯使用`ejs`，所以执行下面命令：
 
@@ -632,6 +634,15 @@ $ git commit
 $ git push -u origin master
 
 ```
+
+添加`.gitignore` 阻止node_modules或编译后的文件等进入版本库 
+
+```JavaScript
+node_modules
+.DS_Store
+build
+``` 
+
 
 > 实例项目`github`地址: https://github.com/Jafeney/tms （代码仅供参考，切勿商用）
 
